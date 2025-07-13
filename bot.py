@@ -31,4 +31,9 @@ def ban_user_for_link(message):
     except Exception as e:
         bot.reply_to(message, f"Не удалось забанить пользователя: {e}")
 
+@bot.message_handler(content_types=['new_chat_members'])
+def make_some(message):
+    bot.send_message(message.chat.id, 'I accepted a new user!')
+    bot.approve_chat_join_request(message.chat.id, message.from_user.id)
+
 bot.infinity_polling(none_stop=True)
